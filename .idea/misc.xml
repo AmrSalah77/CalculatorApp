@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Summer3/CalculatorApp/app/src/main/res/layout-night/activity_main.xml" value="0.264" />
+        <entry key="..\:/Summer3/CalculatorApp/app/src/main/res/layout-night/activity_main_dark.xml" value="0.2" />
         <entry key="..\:/Summer3/CalculatorApp/app/src/main/res/layout/activity_main.xml" value="0.264" />
       </map>
     </option>
