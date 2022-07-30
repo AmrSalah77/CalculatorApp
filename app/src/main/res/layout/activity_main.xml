@@ -15,6 +15,7 @@
         android:layout_weight="35"
         android:backgroundTint="@color/black"
         android:gravity="center|right"
+        android:maxLength="15"
         android:maxLines="1"
         android:textColor="@color/black"
         android:textColorHint="@color/black"
