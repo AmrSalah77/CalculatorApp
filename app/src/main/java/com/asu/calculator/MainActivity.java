@@ -10,13 +10,13 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
 
     Button btn6,btn8,btn9,btn10,btn11,btn12,btn13,btn14,btn15,btn16,btn17,btn18,btn19,btn20,btn21,btn22,btn23;
-    TextView txt;
+    TextView numbers;
     View.OnClickListener num_listener = new View.OnClickListener() {
         @Override
         public void onClick(View ob1) {
             Button tempBtn = (Button) ob1;
-            txt.append(tempBtn.getText().toString());
-            double x = Double.parseDouble(txt.getText().toString());
+            numbers.append(tempBtn.getText().toString());
+            double x = Double.parseDouble(numbers.getText().toString());
         }
     };
     @Override
@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         btn21 = findViewById(R.id.button21);
         btn22 = findViewById(R.id.button22);
         btn23 = findViewById(R.id.button23);
-        txt = findViewById((R.id.textView));
+        numbers = findViewById((R.id.textView));
         btn9.setOnClickListener(num_listener);
         btn10.setOnClickListener(num_listener);
         btn11.setOnClickListener(num_listener);
