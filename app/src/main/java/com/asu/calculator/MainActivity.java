@@ -25,9 +25,52 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View displayText) {
             Button tempBtn = (Button) displayText ;
-            binding.display.append(tempBtn.getText().toString());
+
+            switch(operator){
+                case 0:
+                    operand+=Integer.parseInt(binding.display.getText().toString());
+                    break;
+                case 1:
+                    operand-=Integer.parseInt(binding.display.getText().toString());
+                    break;
+                case 2:
+                    operand*=Integer.parseInt(binding.display.getText().toString());
+                    break;
+                case 3:
+                    operand/=Integer.parseInt(binding.display.getText().toString());
+                    break;
+                case 4:
+                    binding.display.setText(Integer.toString(operand));
+                    break;
+            }
+            binding.display.setText(Integer.toString(operand));
+            if(tempBtn.getText().toString().equals("+")) operator=0;
+            if(tempBtn.getText().toString().equals("-")) operator=1;
+            if(tempBtn.getText().toString().equals("*")) operator=2;
+            if(tempBtn.getText().toString().equals("/")) operator=3;
+            if(tempBtn.getText().toString().equals("=")) operator=4;
+
         }
     };
+
+    View.OnClickListener hidden_operation_listener = new View.OnClickListener() {
+        @Override
+        public void onClick(View displayText) {
+            Button tempBtn = (Button) displayText ;
+            String displayString = binding.display.getText().toString();
+            if(tempBtn.getText().toString().equals("C")) operator=0;
+            if(tempBtn.getText().toString().equals("\u232b")) operator=1;
+            switch(operator){
+                case 0:
+                    binding.display.setText("");
+                    break;
+                case 1:
+                    binding.display.setText(displayString.substring(0,displayString.length()-1));
+                    break;
+            }
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,5 +93,7 @@ public class MainActivity extends AppCompatActivity {
         binding.multiplyButton.setOnClickListener(operation_listener);
         binding.divisionButton.setOnClickListener(operation_listener);
         binding.precentageButton.setOnClickListener(operation_listener);
+        binding.clearButton.setOnClickListener(hidden_operation_listener);
+        binding.backspaceButton.setOnClickListener(hidden_operation_listener);
     }
 }
