@@ -27,7 +27,9 @@ public class MainActivity extends AppCompatActivity {
             String buttonText = tempBtn.getText().toString();
             //display numbers on screen
             binding.display.append(buttonText);
+            binding.display.setText(binding.display.getText().toString());
             //set flag to true
+            if(binding.display.getText().toString().length()<30)
             lastNumeric = true;
             }
     };
@@ -44,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
                 case "\u002b":
                     if (lastNumeric) {
                         binding.display.append("+");
+                        binding.display.setText(binding.display.getText().toString());
                         lastNumeric = false;
                     }
                     break;
@@ -53,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
                     //make sure cant add more than two minus
                     if (!displayString.endsWith("--")) {
                         binding.display.append("-");
+                        binding.display.setText(binding.display.getText().toString());
                         lastNumeric = false;
                     }
                     break;
@@ -61,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
                 case "\u00D7":
                     if (lastNumeric) {
                         binding.display.append("*");
+                        binding.display.setText(binding.display.getText().toString());
                         lastNumeric = false;
                     }
                     break;
@@ -69,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
                 case "\u00F7":
                     if (lastNumeric) {
                         binding.display.append("/");
+                        binding.display.setText(binding.display.getText().toString());
                         lastNumeric = false;
                     }
                     break;
@@ -77,14 +83,21 @@ public class MainActivity extends AppCompatActivity {
                 case "\u003D":
                     //check if last input was a number not an operand
                     if (lastNumeric) {
-                        //prevent app crash because of arithmetic exceptions
-                        try {
-                            //solve the mathematical expression
-                            result = new ExpressionBuilder(displayString).build();
-                            //display result on screen
-                            binding.display.setText(String.valueOf(result.evaluate()));
-                            lastFormula = displayString;
-                        } catch (ArithmeticException e) {
+                        if (!(binding.display.getText().toString().contains("i"))) {
+                            //prevent app crash because of arithmetic exceptions
+                            try {
+                                //solve the mathematical expression
+                                result = new ExpressionBuilder(displayString).build();
+                                //display result on screen
+                                binding.display.setText(String.valueOf(result.evaluate()));
+                                //save last formula
+                                lastFormula = displayString;
+                                //handle infinity text problem
+                                if(binding.display.getText().toString().contains("i")){
+                                    binding.display.setText("infinity");
+                                }
+                            } catch (ArithmeticException e) {
+                            }
                         }
                     }
                     break;
@@ -94,6 +107,7 @@ public class MainActivity extends AppCompatActivity {
                     //check if last input was a number not an operand
                     if (lastNumeric) {
                         binding.display.append(".");
+                        binding.display.setText(binding.display.getText().toString());
                         lastNumeric = false;
                     }
                     break;
@@ -129,9 +143,12 @@ public class MainActivity extends AppCompatActivity {
                     break;
 
                 case "MR":
+                    //recall saved number
                     binding.display.append(String.valueOf(memory));
+                    binding.display.setText(binding.display.getText().toString());
                     break;
                 case "MC":
+                    //clear saved number
                     memory = 0;
                     break;
                 case "M+":
