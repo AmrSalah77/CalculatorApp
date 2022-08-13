@@ -1,6 +1,7 @@
 package com.asu.calculator;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -158,6 +159,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().hide();
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
@@ -189,19 +191,16 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
-        // Save the user's current game state
+        // Save display and last numeric state
         savedInstanceState.putString("displayString" , binding.display.getText().toString());
         savedInstanceState.putBoolean("lastNumeric", lastNumeric);
-        // Always call the superclass so it can save the view hierarchy state
         super.onSaveInstanceState(savedInstanceState);
     }
 
     @Override
     public void onRestoreInstanceState(Bundle savedInstanceState) {
-        // Always call the superclass so it can restore the view hierarchy
         super.onRestoreInstanceState(savedInstanceState);
-
-        // Restore state members from saved instance
+        // Restore display and last numeric state
          String displayString = savedInstanceState.getString("displayString");
          binding.display.setText(displayString);
          boolean l = savedInstanceState.getBoolean("lastNumeric");
