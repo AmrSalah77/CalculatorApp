@@ -24,4 +24,5 @@
     <string name="memoryAdd">M+</string>
     <string name="memorySubtract">M-</string>
     <string name="memoryRecall">MR</string>
+    <string name="negative">+/-</string>
 </resources>

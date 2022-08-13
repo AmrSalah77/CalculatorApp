@@ -15,7 +15,7 @@
         android:layout_weight="35"
         android:backgroundTint="@color/black"
         android:gravity="center|right"
-        android:maxLength="15"
+        android:maxLength="10"
         android:maxLines="1"
         android:textColor="@color/black"
         android:textColorHint="@color/black"
@@ -116,7 +116,7 @@
                 android:textSize="26sp" />
 
             <Button
-                android:id="@+id/precentageButton"
+                android:id="@+id/negativeButton"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginStart="1dp"
@@ -125,7 +125,7 @@
                 android:layout_marginBottom="-5dp"
                 android:layout_weight="1"
                 android:backgroundTint="@color/light_white"
-                android:text="@string/mod"
+                android:text="@string/negative"
                 android:textColor="@color/teal_200"
                 android:textSize="26sp" />
 
