@@ -96,8 +96,7 @@ public class MainActivity extends AppCompatActivity {
                                 if(binding.display.getText().toString().contains("i")){
                                     binding.display.setText("infinity");
                                 }
-                            } catch (ArithmeticException e) {
-                            }
+                            } catch (ArithmeticException | NumberFormatException e) {}
                         }
                     }
                     break;
