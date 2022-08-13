@@ -159,9 +159,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().hide();
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
+        setTheme(R.style.Theme_Calculator);
         setContentView(view);
         binding.oneButton.setOnClickListener(num_listener);
         binding.twoButton.setOnClickListener(num_listener);
