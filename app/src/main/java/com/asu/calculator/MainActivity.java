@@ -1,5 +1,6 @@
 package com.asu.calculator;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -12,6 +13,7 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     boolean lastNumeric = false; //flag to check if last user input was a number
     Expression result ;// solve mathematical expressions library
+    double memory = 0;
 
 
     //numbers listener
@@ -72,13 +74,13 @@ public class MainActivity extends AppCompatActivity {
                 case "\u003D":
                     //check if last input was a number not an operand
                     if(lastNumeric){
-                        //checks if there is division by zero
-                        if(!displayString.contains("/0")){
+                        //prevent app crash because of arithmetic exceptions
+                        try {
                             //solve the mathematical expression
                             result = new ExpressionBuilder(displayString).build();
                             //display result on screen
                             binding.display.setText(String.valueOf(result.evaluate()));
-                        }
+                        }catch (ArithmeticException e){}
                     }
                     break;
 
@@ -119,12 +121,38 @@ public class MainActivity extends AppCompatActivity {
                     //else change the number to negative
                     else
                         binding.display.setText("-"+displayString);
+                    break;
+
+                case "MR":
+                    binding.display.append(String.valueOf(memory));
+                    break;
+                case "MC":
+                    memory = 0;
+                    break;
+                case "M+":
+                    if(lastNumeric){
+                        //checks if there is division by zero
+                        try {
+                            //solve the mathematical expression
+                            result = new ExpressionBuilder(displayString).build();
+                            memory += result.evaluate();
+                        }catch (ArithmeticException e){}
+                    }
+                    break;
+                case "M-":
+                    if(lastNumeric){
+                        //checks if there is division by zero
+                        try {
+                            //solve the mathematical expression
+                            result = new ExpressionBuilder(displayString).build();
+                            memory -= result.evaluate();
+                        }catch (ArithmeticException e){}
+                    }
+                    break;
+
             }
         }
     };
-
-
-
 
 
     @Override
@@ -153,5 +181,30 @@ public class MainActivity extends AppCompatActivity {
         binding.clearButton.setOnClickListener(operation_listener);
         binding.backspaceButton.setOnClickListener(operation_listener);
         binding.decimalButton.setOnClickListener(operation_listener);
+        binding.MCbutton.setOnClickListener(operation_listener);
+        binding.MRbutton.setOnClickListener(operation_listener);
+        binding.mPlusButton.setOnClickListener(operation_listener);
+        binding.mMinusButton.setOnClickListener(operation_listener);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        // Save the user's current game state
+        savedInstanceState.putString("displayString" , binding.display.getText().toString());
+        savedInstanceState.putBoolean("lastNumeric", lastNumeric);
+        // Always call the superclass so it can save the view hierarchy state
+        super.onSaveInstanceState(savedInstanceState);
+    }
+
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+        // Always call the superclass so it can restore the view hierarchy
+        super.onRestoreInstanceState(savedInstanceState);
+
+        // Restore state members from saved instance
+         String displayString = savedInstanceState.getString("displayString");
+         binding.display.setText(displayString);
+         boolean l = savedInstanceState.getBoolean("lastNumeric");
+         lastNumeric = l;
     }
 }

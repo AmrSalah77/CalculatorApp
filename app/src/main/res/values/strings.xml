@@ -19,7 +19,6 @@
     <string name="decimal">\u002E</string>
     <string name="clear">C</string>
     <string name="backspace">\u232b</string>
-    <string name="mod">%</string>
     <string name="memoryClear">MC</string>
     <string name="memoryAdd">M+</string>
     <string name="memorySubtract">M-</string>
