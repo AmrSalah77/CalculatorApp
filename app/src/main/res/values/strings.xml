@@ -24,4 +24,5 @@
     <string name="memorySubtract">M-</string>
     <string name="memoryRecall">MR</string>
     <string name="negative">+/-</string>
+    <string name="undo">\u21B6</string>
 </resources>
