@@ -229,6 +229,8 @@ public class MainActivity extends AppCompatActivity {
         savedInstanceState.putBoolean("lastNumeric", lastNumeric);
         //save last formula calculated
         savedInstanceState.putString("last formula", lastFormula);
+        //save memory number
+        savedInstanceState.putDouble("memory", memory);
         super.onSaveInstanceState(savedInstanceState);
     }
 
@@ -242,5 +244,7 @@ public class MainActivity extends AppCompatActivity {
         lastNumeric = savedInstanceState.getBoolean("lastNumeric");
          //restore last formula calculated
         lastFormula = savedInstanceState.getString("last formula");
+        // restore save memory number
+        memory = savedInstanceState.getDouble("memory");
     }
 }
