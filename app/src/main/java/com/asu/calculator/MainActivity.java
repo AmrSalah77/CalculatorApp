@@ -89,6 +89,9 @@ public class MainActivity extends AppCompatActivity {
                                 //solve the mathematical expression
                                 result = new ExpressionBuilder(displayString).build();
                                 //display result on screen
+                                if((result.evaluate()%1) == 0)
+                                    binding.display.setText(String.valueOf(Math.round(result.evaluate())));
+                                else
                                 binding.display.setText(String.valueOf(result.evaluate()));
                                 //save last formula
                                 lastFormula = displayString;
@@ -190,7 +193,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
-        setTheme(R.style.Theme_Calculator);
         setContentView(view);
         Objects.requireNonNull(getSupportActionBar()).hide();
         binding.oneButton.setOnClickListener(num_listener);
