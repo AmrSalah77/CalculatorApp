@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.asu.calculator.databinding.ActivityMainBinding;
 import net.objecthunter.exp4j.Expression;
@@ -29,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
             binding.display.append(buttonText);
             binding.display.setText(binding.display.getText().toString());
             //set flag to true
-            if(binding.display.getText().toString().length()<30)
             lastNumeric = true;
             }
     };
@@ -83,7 +83,6 @@ public class MainActivity extends AppCompatActivity {
                 case "\u003D":
                     //check if last input was a number not an operand
                     if (lastNumeric) {
-                        if (!(binding.display.getText().toString().contains("i"))) {
                             //prevent app crash because of arithmetic exceptions
                             try {
                                 //solve the mathematical expression
@@ -100,8 +99,19 @@ public class MainActivity extends AppCompatActivity {
                                 if(binding.display.getText().toString().contains("i")){
                                     binding.display.setText("infinity");
                                 }
-                            } catch (ArithmeticException | NumberFormatException e) {}
-                        }
+                            } catch (ArithmeticException e) {
+                                Toast.makeText(getApplicationContext(),"Cannot be divided by 0",Toast.LENGTH_SHORT).show();
+                            }
+                            catch (NumberFormatException e){
+                                Toast.makeText(getApplicationContext(),"multiple decimal points",Toast.LENGTH_SHORT).show();
+                            }
+                            catch (IllegalArgumentException e){
+                                if(binding.display.getText().toString().contains("i")){
+                                    Toast.makeText(getApplicationContext(),"delete infinity word",Toast.LENGTH_SHORT).show();
+                                }
+                                else
+                                    Toast.makeText(getApplicationContext(),"multiple operands",Toast.LENGTH_SHORT).show();
+                            }
                     }
                     break;
 
@@ -131,8 +141,12 @@ public class MainActivity extends AppCompatActivity {
                     String newDisplay = binding.display.getText().toString();
                     //allow to write operands again after deleting operand
                     if (!(newDisplay.endsWith("-") || newDisplay.endsWith("+") ||
-                            newDisplay.endsWith("*") || newDisplay.endsWith("/")))
+                            newDisplay.endsWith("*") || newDisplay.endsWith("/"))){
                         lastNumeric = true;
+                    }
+                    else{
+                        lastNumeric = false;
+                    }
                     break;
 
                 //negative operand
@@ -162,6 +176,7 @@ public class MainActivity extends AppCompatActivity {
                             result = new ExpressionBuilder(displayString).build();
                             memory += result.evaluate();
                         } catch (ArithmeticException e) {
+                            Toast.makeText(getApplicationContext(),"Cannot be divided by 0",Toast.LENGTH_SHORT).show();
                         }
                     }
                     break;
@@ -173,6 +188,7 @@ public class MainActivity extends AppCompatActivity {
                             result = new ExpressionBuilder(displayString).build();
                             memory -= result.evaluate();
                         } catch (ArithmeticException e) {
+                            Toast.makeText(getApplicationContext(),"Cannot be divided by 0",Toast.LENGTH_SHORT).show();
                         }
                     }
                     break;

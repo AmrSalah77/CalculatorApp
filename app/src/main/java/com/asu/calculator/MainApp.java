@@ -29,7 +29,7 @@ public class MainApp extends AppCompatActivity {
                 // starting a new activity.
                 startActivity(calc);
             }
-        }, 1600);
+        }, 1500);
     }
 
     @Override
