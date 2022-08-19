@@ -89,7 +89,8 @@ public class MainActivity extends AppCompatActivity {
                                 //solve the mathematical expression
                                 result = new ExpressionBuilder(displayString).build();
                                 //display result on screen
-                                if((result.evaluate()%1) == 0)
+                                if((result.evaluate()%1) == 0 && String.valueOf(result.evaluate()).length()<=12)
+                                    //convert double to integer
                                     binding.display.setText(String.valueOf(Math.round(result.evaluate())));
                                 else
                                 binding.display.setText(String.valueOf(result.evaluate()));
