@@ -42,18 +42,18 @@ public class MainActivity extends AppCompatActivity {
             String buttonText = tempBtn.getText().toString();
             String displayString = binding.display.getText().toString();
             switch (buttonText) {
-                //plus operand
+                //add operand
                 case "\u002b":
-                    if (lastNumeric) {
+                    if (lastNumeric && !(binding.display.getText().toString().length() == 0)) {
                         binding.display.append("+");
                         binding.display.setText(binding.display.getText().toString());
                         lastNumeric = false;
                     }
                     break;
 
-                //minus operand
+                //subtract operand
                 case "\u2212":
-                    //make sure cant add more than two minus
+                    //make sure cant add more than two subtract
                     if (!displayString.endsWith("--")) {
                         binding.display.append("-");
                         binding.display.setText(binding.display.getText().toString());
@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
 
                 //multiplication operand
                 case "\u00D7":
-                    if (lastNumeric) {
+                    if (lastNumeric && !(binding.display.getText().toString().length() == 0)) {
                         binding.display.append("*");
                         binding.display.setText(binding.display.getText().toString());
                         lastNumeric = false;
@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
 
                 //division operand
                 case "\u00F7":
-                    if (lastNumeric) {
+                    if (lastNumeric && !(binding.display.getText().toString().length() == 0)) {
                         binding.display.append("/");
                         binding.display.setText(binding.display.getText().toString());
                         lastNumeric = false;
@@ -103,14 +103,14 @@ public class MainActivity extends AppCompatActivity {
                                 Toast.makeText(getApplicationContext(),"Cannot be divided by 0",Toast.LENGTH_SHORT).show();
                             }
                             catch (NumberFormatException e){
-                                Toast.makeText(getApplicationContext(),"multiple decimal points",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(),"Format error",Toast.LENGTH_SHORT).show();
                             }
                             catch (IllegalArgumentException e){
                                 if(binding.display.getText().toString().contains("i")){
                                     Toast.makeText(getApplicationContext(),"delete infinity word",Toast.LENGTH_SHORT).show();
                                 }
                                 else
-                                    Toast.makeText(getApplicationContext(),"multiple operands",Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getApplicationContext(),"Argument error",Toast.LENGTH_SHORT).show();
                             }
                     }
                     break;
