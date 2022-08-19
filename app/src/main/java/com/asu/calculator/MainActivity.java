@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     boolean lastNumeric = false; //flag to check if last user input was a number
     Expression result ;// solve mathematical expressions library
-    double memory = 0; // initialize memory
+    double memory = 0.0; // initialize memory
     String lastFormula; // for undo button
 
 
@@ -161,12 +161,18 @@ public class MainActivity extends AppCompatActivity {
 
                 case "MR":
                     //recall saved number
-                    binding.display.append(String.valueOf(memory));
+                    if((memory%1) == 0 && String.valueOf(memory).length()<=12)
+                        //convert double to integer
+                        binding.display.append(String.valueOf(Math.round(memory)));
+                    else
+                        binding.display.append(String.valueOf(memory));
+                    //update displayed text
                     binding.display.setText(binding.display.getText().toString());
+                    lastNumeric=true;
                     break;
                 case "MC":
                     //clear saved number
-                    memory = 0;
+                    memory = 0.0;
                     break;
                 case "M+":
                     if (lastNumeric) {
