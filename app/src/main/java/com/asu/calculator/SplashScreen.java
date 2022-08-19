@@ -8,7 +8,7 @@ import android.view.WindowManager;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class MainApp extends AppCompatActivity {
+public class SplashScreen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,7 +24,7 @@ public class MainApp extends AppCompatActivity {
             @Override
             public void run() {
                 // creating a new intent
-                Intent calc = new Intent(MainApp.this, MainActivity.class);
+                Intent calc = new Intent(SplashScreen.this, MainActivity.class);
 
                 // starting a new activity.
                 startActivity(calc);
